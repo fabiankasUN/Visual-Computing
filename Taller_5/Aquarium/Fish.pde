@@ -1,48 +1,36 @@
+public class Fish{
 
-import remixlab.proscene.*;
-
-Scene scene;
-//Choose one of P3D for a 3D scene, or P2D or JAVA2D for a 2D scene
-String renderer = P3D;
-
-void setup() {
-  size(800, 600, renderer);
-  //Scene instantiation
-  scene = new Scene(this);
-  // when damping friction = 0 -> spin
-  scene.eye().frame().setDampingFriction(0);
+  private PImage texture;
+  private int fishWidth;
+  private int fishHeight;
+  private int x;
+  private int y;
+  private int z;
   
-  img = loadImage("p11.jpg");
-  initializeSphere(30,30);
+  public Fish( PImage texture, int fw, int fh ){
+    this.texture = texture;
+    this.fishWidth = fw;
+    this.fishHeight = fh;
+    x = int( randomNumber(-100,100) );
+    y = int( randomNumber(-100,100) );
+    z = int( randomNumber(-100,100) );
+    initializeSphere(20,20);
+    
+  }
   
-}
-PImage img;
-void draw() {
-  background(0);
-  fill(255,255,255,191);
   
-  pushMatrix();
-  noStroke();
-  scale(1,2.5,1);
-  textureSphere(7,7,7,img);
-  popMatrix();
-  
-  //translate(width/2, height/2, 0);
-  stroke(255);
-  noFill();
-  box(200);
+  public void paint(){
+    pushMatrix();
+    translate(x,y,z);
+    noStroke();
+    scale(1,2.5,1);
+    textureSphere(5,5,5,texture);
+    popMatrix();
+  }
   
   
   
   
-  
-  //tint(0,0,0, 100);
-  //stroke(255);
-  //box(120,120,120);
-  fill(204, 102, 0, 150);
-  scene.drawTorusSolenoid();
-}
-
 int ptsW, ptsH;
 
 int numPointsW;
@@ -120,10 +108,5 @@ void textureSphere(float rx, float ry, float rz, PImage t) {
   endShape();
 }
 
-/*void keyPressed() {
-  if(scene.eye().frame().dampingFriction() == 0)
-    scene.eye().frame().setDampingFriction(0.5);
-  else
-    scene.eye().frame().setDampingFriction(0);
-  println("Camera damping friction now is " + scene.eye().frame().dampingFriction());
-}*/
+  
+}
