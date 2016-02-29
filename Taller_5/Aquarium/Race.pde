@@ -1,8 +1,9 @@
 public class Race{
  
-  public ArrayList<Fish> fishes;
-  public PImage texture;
-  
+  private ArrayList<Fish> fishes;
+  private PImage texture;
+  private int x;
+  private int y;
   public Race( PImage image){
     fishes = new ArrayList<Fish>();
     this.texture = image;
@@ -16,7 +17,7 @@ public class Race{
   public void paintFishes(){  
     for( int i = 0; i < fishes.size(); i++ ){
       Fish tmpFish = fishes.get(i);
-      tmpFish.paint();
+      tmpFish.paint(fishes);
     }
 }
   

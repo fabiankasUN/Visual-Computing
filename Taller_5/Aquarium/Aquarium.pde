@@ -43,7 +43,7 @@ void createAquarium(){
   races = new ArrayList<Race>();
   
   for( int i = 0; i < numberRaces; i++ ){
-    tmp = int(random(5)+1);
+    tmp = int(random(20)+1);
     tmpImage = "p" + int(random(17)+1)+ ".jpg";
     tmpTexture = loadImage(tmpImage);
     races.add( new Race( tmpTexture ) );
