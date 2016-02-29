@@ -35,23 +35,40 @@ void setup() {
   temp.endDraw();
 }
    
-   
+public boolean debug = true;
+public void debug(){
+    if(debug){
+      print( "wheel -->" + wheel + "\n");
+      print( "x -->" + x + "\n");
+      print( "y -->" + y + "\n");
+      print("mouseX -->" +(mouseX- wheel/2)+"\t");
+      print("mouseY -->" + (mouseY-wheel/2)+"\n");
+      print("X: -50 + wheel/2 -->" + (mouseX -50 - wheel/2) + "\n");
+      print("Y: -50 + wheel/2 -->" + (mouseY -50 - wheel/2) + "\n");
+      print("size -->" + (100 + (wheel/2)*2) + "\n");
+      print("x*4-wheel/2 -->" + (x*4+wheel/2) + "\n");
+      print("y*3-wheel/2 -->" + (y*3+wheel/2) + "\n");
+    }
+}
    
 void drawMini(){
   
-  x = mouseX - 50;
-  y = mouseY - 50;
-    
-  mini.beginDraw();
+  x = mouseX - 50 - wheel/2;
+  y = mouseY - 50 - wheel/2;
+  
+ 
+  
+  mini.beginDraw(); //<>//
   mini.noFill();
   mini.image(img,0,0,mw,mh);
   
   mini.pushMatrix();
   
-  mini.translate(mouseX, mouseY);
+  mini.translate(mouseX- wheel/2, mouseY-  wheel/2);
+  debug();
   float c = 4*cos(radians(f));
   mini.rotate(c);
-  mini.rect(-50 ,-50 ,100,100);
+  mini.rect(-50 - wheel/2 ,-50 - wheel/2 ,100 + wheel*2,100+wheel*2);
   
   mini.popMatrix();
   
@@ -71,7 +88,8 @@ void drawBack(){
   //back.translate(width/2, height/2);
   //float c = 4*cos(radians(f));
   //back.rotate(c);
-  back.copy(temp.get(),x*4-wheel/2, y*3-wheel/2,100*4 + wheel, 100*3 + wheel, 0,0, width, height );
+  //back.copy(temp.get(),x*4+((wheel/2)*4), y*3+((wheel/2)*3),100*4 + (wheel/2*4), 100*3 + (wheel/2*3), 0,0, width, height );
+  back.copy(temp.get(),(x - (wheel/2))*4, (y -(wheel/2))*3,(100+(wheel*2))*4, (100+(wheel*2))*3 , 0,0, width, height );
   //back.copy(temp.get(),x*5, y*5, 50*5, 50*5, 0-width/2, 0-height/2, width, height );
   /*back.translate(width/2, height/2);
   float c = 4*cos(radians(f));
@@ -83,7 +101,7 @@ void drawBack(){
 void draw() {
   
   if(mousePressed){
-    wheel = 0;
+    //wheel = 0;
   }
   if (mousePressed && mouseButton == LEFT) {
        f+=0.5;
@@ -123,7 +141,7 @@ void draw() {
   }
   
   void mouseWheel( MouseEvent e){
-    wheel+= e.getCount()*20;
+    wheel+= -e.getCount();
     
   }
   
